@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'com.intuit.karate:karate-junit5:1.2.0.RC4'
+}
+
+test{
+    useJUnitPlatform()
+    systemProperty("karate.options",System.properties.getProperty("karate.options"))// para pasar el tiempo de ejecución
+}
+
+sourceSets { // para no estar cambiando a las base de la carpeta src/test/java, lee lo qu este bajo la carpeta src/java/test
+    test{
+        resources {
+            srcDir file('src/test/java')
+            exclude '**/*.java'
+        }
+    }
+}
+
